@@ -1,12 +1,11 @@
 import React from 'react';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faCode, faFilm } from '@fortawesome/free-solid-svg-icons';
 
 import NavIcon from './NavIcon';
 
 export default function NavBar() {
   return (
-    <nav className="bg-columbia border-b border-dark">
+    <nav className="bg-columbia">
       <div className="max-w-screen-xl mx-auto py-2 px-2 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <span className="flex items-center">
@@ -21,7 +20,7 @@ export default function NavBar() {
           <div className="flex items-center">
             <NavIcon
               link="https://github.com/michaelihwang/shoppies"
-              icon={faGithub}
+              icon={faCode}
             />
           </div>
         </div>

@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 interface SearchFieldProps {
   placeholder?: string;
-  onSubmit: (event: React.FormEvent<HTMLFormElement | HTMLButtonElement>) => void;
+  value: string | number | readonly string[];
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: (event: React.FormEvent<HTMLButtonElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export default function SearchField({ placeholder = 'Search', onSubmit }: SearchFieldProps) {
-  const [query, setQuery] = useState('');
+export default function SearchField({
+  placeholder = 'Search',
+  onChange,
+  onClick,
+  onSubmit,
+  value
+}: SearchFieldProps) {
   return (
     <div className="flex-1 flex items-center justify-center p-2">
       <div className="max-w-xl w-full">
@@ -21,10 +29,7 @@ export default function SearchField({ placeholder = 'Search', onSubmit }: Search
               flex items-center
               border border-dark bg-columbia
             "
-            onClick={e => {
-              onSubmit(e);
-              console.log(query);
-            }}
+            onClick={onClick}
           >
             <FontAwesomeIcon
               icon={faSearch}
@@ -35,7 +40,6 @@ export default function SearchField({ placeholder = 'Search', onSubmit }: Search
           <form onSubmit={e => {
             e.preventDefault();
             onSubmit(e);
-            console.log(query);
           }}>
             <input
               id="search"
@@ -50,8 +54,8 @@ export default function SearchField({ placeholder = 'Search', onSubmit }: Search
               "
               placeholder={placeholder}
               type="search"
-              value={query}
-              onChange={e => setQuery(e.target.value)}
+              value={value}
+              onChange={onChange}
             />
           </form>
           </div>

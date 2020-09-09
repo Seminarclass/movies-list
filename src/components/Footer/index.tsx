@@ -1,9 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faColumns } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 
 const social = [
+  {
+    icon: faColumns,
+    link: 'https://michaelihwang.com/'
+  },
   {
     icon: faGithub,
     link: 'https://github.com/michaelihwang'
