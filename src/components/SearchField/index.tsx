@@ -18,7 +18,7 @@ export default function SearchField({
   value
 }: SearchFieldProps) {
   return (
-    <div className="flex-1 flex items-center justify-center p-2">
+    <div className="flex-1 flex items-center justify-center">
       <div className="max-w-xl w-full">
         <div className="relative">
           <button

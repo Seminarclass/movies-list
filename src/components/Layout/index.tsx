@@ -7,7 +7,7 @@ interface LayoutProps {
 
 export default function Layout({ children, className = '' }: LayoutProps) {
   return (
-    <div className={`container mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div className={`container mx-auto px-4 sm:px-6 lg:px-8 pt-16 ${className}`}>
       {children}
     </div>
   );

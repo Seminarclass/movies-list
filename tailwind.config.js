@@ -28,6 +28,9 @@ module.exports = {
         160: '58rem',
         168: '64rem',
       },
+      fontFamily: {
+        open: ['Open Sans'],
+      },
     },
   },
   variants: {},

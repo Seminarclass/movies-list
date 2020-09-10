@@ -11,7 +11,7 @@ export default function Header() {
         alt="icon"
       />
       <p className="font-light text-gray-400">
-        Search to nominate films for the Shoppies
+        Search to nominate films
       </p>
     </header>
   );
