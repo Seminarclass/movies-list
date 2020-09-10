@@ -9,7 +9,7 @@ export default function App() {
     <CookiesProvider>
       <ToastProvider
         autoDismiss
-        autoDismissTimeout={6000}
+        autoDismissTimeout={5000}
         placement="bottom-center"
       >
         <AppPage />

@@ -13,16 +13,19 @@ import { Movies } from '../utils/constants';
 
 /*
  * TODO:
- * 1) NavBar dropdown list to see list of nominated movies
- * 2) dropdown list with numbers if > 0
+ * 1) NavBar slider menu for list of nominations
  * 3) share nominations via url
- * 4) deploy online
+ * 4) deploy online on Netlify
  */
 
 export default function AppPage() {
   const { addToast } = useToasts();
 
+  // slider and nomination list states
+  const [sliderOpen, setSliderOpen] = useState<boolean>(false);
   const [nominations, setNominations] = useState<Array<Movies>>([]);
+
+  // search results and query states
   const [searchResults, setSearchResults] = useState<Array<Movies>>([]);
   const [query, setQuery] = useState<string>('');
 
@@ -62,7 +65,11 @@ export default function AppPage() {
 
   return (
     <div className="font-open">
-      <NavBar />
+      <NavBar
+        numItems={nominations.length}
+        sliderOpen={sliderOpen}
+        onSliderOpen={() => setSliderOpen(open => !open)}
+      />
       <Layout>
         <Header />
         <br />
@@ -76,14 +83,15 @@ export default function AppPage() {
         <br />
         {searchResults.length > 0 ? (
           <Table
-            searchResults={searchResults}
+            data={searchResults}
             nominations={nominations}
             onBtnClick={toggleNomination}
           />
         ) : null}
-        {nominations.length > 0 ? (
+        <br />
+        {sliderOpen ? (
           <Table
-            searchResults={nominations}
+            data={nominations}
             nominations={nominations}
             onBtnClick={toggleNomination}
           />

@@ -1,30 +1,27 @@
 import React from 'react';
-import { faCode, faFilm } from '@fortawesome/free-solid-svg-icons';
 
-import NavIcon from './NavIcon';
+import AppIcon from './AppIcon';
+import HamburgerButton from './HamburgerButton';
 
-export default function NavBar() {
+interface NavBarProps {
+  numItems: number;
+  sliderOpen: boolean;
+  onSliderOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+export default function NavBar({ numItems, sliderOpen, onSliderOpen }: NavBarProps) {
   return (
     <nav className="fixed w-full bg-columbia">
       <div className="max-w-screen-xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <span className="flex items-center">
-            <NavIcon
-              link="#"
-              icon={faFilm}
-            />
-            <p className="ml-2 font-medium truncate italic text-dark">
-              The Nominator
-            </p>
-          </span>
-          <div className="flex items-center">
-            {/* share saved nominations */}
-            {/* list of nominations here */}
-            <NavIcon
-              link="https://github.com/michaelihwang/nominator"
-              icon={faCode}
-            />
-          </div>
+          <AppIcon
+            link="/"
+          />
+          <HamburgerButton
+            numItems={numItems}
+            open={sliderOpen}
+            onClick={onSliderOpen}
+          />
         </div>
       </div>
     </nav>
