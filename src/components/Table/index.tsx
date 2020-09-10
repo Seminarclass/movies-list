@@ -8,11 +8,12 @@ import { Movies } from '../../utils/constants';
 const headers = ['Title', 'Year', 'Status']
 
 interface TableProps {
-  searched: Array<Movies>;
-  nominated: Array<Movies>;
+  searchResults: Array<Movies>;
+  nominations: Array<Movies>;
+  onBtnClick: (newItem: Movies) => void;
 }
 
-export default function Table({ searched, nominated }: TableProps) {
+export default function Table({ searchResults, nominations, onBtnClick }: TableProps) {
   return (
     <div className="flex-1 flex flex-col">
       <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -20,13 +21,13 @@ export default function Table({ searched, nominated }: TableProps) {
           <table className="min-w-full divide-y divide-dark">
             <TableHeader headers={headers} />
             <tbody className="bg-white divide-y divide-gray-200">
-              {searched.map((movie) => (
+              {searchResults.map(movie => (
                 <TableRow
                   key={movie.imdbID}
                   title={movie.Title}
                   year={movie.Year}
-                  nominated={true}
-                  onBtnClick={() => { }}
+                  nominated={nominations.some(nom => nom.imdbID === movie.imdbID)}
+                  onBtnClick={() => onBtnClick(movie)}
                 />
               ))}
             </tbody>

@@ -13,11 +13,10 @@ import { Movies } from '../utils/constants';
 
 /*
  * TODO:
- * 1) NominateButton to toggle b/w nominated and not nominated
- * 2) NavBar dropdown list to see list of nominated movies
- * 3) dropdown list with numbers if > 0
- * 4) share nominations via url
- * 5) deploy online
+ * 1) NavBar dropdown list to see list of nominated movies
+ * 2) dropdown list with numbers if > 0
+ * 3) share nominations via url
+ * 4) deploy online
  */
 
 export default function AppPage() {
@@ -50,6 +49,17 @@ export default function AppPage() {
     }
   };
 
+  const toggleNomination = (newItem: Movies) => {
+    const isNominated = nominations.some(movie => movie.imdbID === newItem.imdbID);
+    if (isNominated) {
+      setNominations(nominations.filter(movie => movie.imdbID !== newItem.imdbID));
+      addToast(`Removed "${newItem.Title}" from nomination!`, { appearance: 'error' });
+    } else {
+      setNominations(prevState => [...prevState, newItem]);
+      addToast(`Added "${newItem.Title}" to nomination!`, { appearance: 'success' });
+    }
+  };
+
   return (
     <div className="font-open">
       <NavBar />
@@ -65,7 +75,18 @@ export default function AppPage() {
         />
         <br />
         {searchResults.length > 0 ? (
-          <Table searched={searchResults} nominated={nominations} />
+          <Table
+            searchResults={searchResults}
+            nominations={nominations}
+            onBtnClick={toggleNomination}
+          />
+        ) : null}
+        {nominations.length > 0 ? (
+          <Table
+            searchResults={nominations}
+            nominations={nominations}
+            onBtnClick={toggleNomination}
+          />
         ) : null}
       </Layout>
       <Footer />
