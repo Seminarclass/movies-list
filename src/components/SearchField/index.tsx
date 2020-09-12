@@ -27,7 +27,7 @@ export default function SearchField({
               focus:outline-none
               p-3
               flex items-center
-              border border-dark bg-columbia
+              border border-gray-400 bg-columbia rounded-tl rounded-bl
               hover:bg-opacity-75
               transition duration-300 ease-in-out
             "
@@ -48,7 +48,7 @@ export default function SearchField({
               className="
                 block w-full
                 pl-12 pr-3 py-2
-                border border-dark
+                border border-gray-400 rounded shadow
                 leading-5 bg-white
                 focus:outline-none
                 sm:text-sm text-dark

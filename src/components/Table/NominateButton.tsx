@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as Star } from '@fortawesome/free-regular-svg-icons';
+import { faStar as Star, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faStar as SolidStar } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -13,17 +13,25 @@ interface NominateButtonProps {
 export default function NominateButton({ fromSlider = false, nominated, onClick }: NominateButtonProps) {
   return (
     <button
-      className={`
+      className="
         px-2 flex items-center justify-center
         text-xs leading-5 font-extrabold rounded-full
         focus:outline-none
-        ${fromSlider ? 'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium leading-5 bg-red-100 text-red-800 hover:bg-red-300 hover:text-red-900' : ''}
-      `}
+      "
       onClick={onClick}
     >
-      {fromSlider ? 'Remove' : (
+      {fromSlider ? (
         <FontAwesomeIcon
-          className={nominated ? 'text-yellow-200' : 'text-dark'}
+          className="text-red-400 hover:text-red-800 mx-2 transition duration-300 ease-in-out"
+          icon={faTrashAlt}
+          size="2x"
+        />
+      ) : (
+        <FontAwesomeIcon
+          className={`
+            ${nominated ? 'text-yellow-200' : 'text-dark hover:text-yellow-200'}
+            transition duration-300 ease-in-out
+          `}
           icon={nominated ? SolidStar : Star}
           size="2x"
         />

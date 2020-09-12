@@ -11,7 +11,7 @@ export default function AppIcon({ link }: AppIconProps) {
     <a
       className="
         flex items-center p-2 rounded
-        bg-white hover:bg-gray-200
+        bg-white hover:bg-gray-200 shadow
         transition duration-300 ease-in-out
       "
       href={link}

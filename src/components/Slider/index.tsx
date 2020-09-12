@@ -16,7 +16,7 @@ interface SliderProps {
 
 export default function Slider({ open, setOpen, nominations, removeNomination }: SliderProps) {
   return open ? (
-    <div className="fixed inset-0 overflow-hidden">
+    <div className="fixed inset-0 overflow-hidden z-50">
       <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -26,8 +26,8 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
           <div className="relative w-screen max-w-md">
             <div className="h-full flex flex-col space-y-6 py-6 bg-white shadow-xl overflow-y-scroll">
               <header className="px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between space-x-3">
-                  <h2 className="flex items-center text-lg leading-7">
+                <div className="flex items-start justify-between space-x-3">
+                  <h2 className="flex items-center text-lg leading-7 font-extrabold text-dark">
                     <span className="
                       flex items-center justify-center text-center
                       rounded-full
@@ -36,7 +36,7 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
                     ">
                       {nominations.length}
                     </span>
-                    <span className="font-black text-dark mx-4">
+                    <span className="mx-4">
                       Nominated Film{nominations.length !== 1 ? 's' : ''}
                     </span>
                     <FontAwesomeIcon
@@ -48,21 +48,25 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
                   <CloseButton onClick={() => { setOpen(prev => !prev); }} />
                 </div>
               </header>
-              {nominations.length > 0 ? (
-                <Table
-                  slider
-                  data={nominations}
-                  nominations={nominations}
-                  onBtnClick={removeNomination}
-                />
-              ) : (
-                  <div className="
-                    flex items-center justify-center h-full
-                    font-light text-gray-400
-                  ">
-                  Search and nominate some films!
+              <div className="relative flex-1 px-4 sm:px-6">
+                <div className="absolute inset-0 px-4 sm:px-6">
+                  {nominations.length > 0 ? (
+                    <Table
+                      slider
+                      data={nominations}
+                      nominations={nominations}
+                      onBtnClick={removeNomination}
+                    />
+                  ) : (
+                    <div className="
+                      flex items-center justify-center h-full
+                      font-light text-gray-400
+                    ">
+                      Search and nominate some films!
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </section>

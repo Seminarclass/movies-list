@@ -17,19 +17,20 @@ export default function TableRow({
   nominated,
   onBtnClick
 }: TableRowProps) {
+  const colpadding = 'px-3 py-2 sm:px-6 sm:py-4'
   return (
-    <tr className="hover:bg-gray-50">
-      <td className="px-6 py-4">
+    <tr className="text-sm hover:bg-gray-50">
+      <td className={colpadding}>
         <div className="flex items-center flex-wrap">
-          <div className="text-sm leading-5 font-medium text-gray-900">
+          <div className="leading-5 font-medium text-gray-900">
             {title}
           </div>
         </div>
       </td>
-      <td className="px-6 py-4">
-        <div className="text-sm leading-5 text-gray-900">{year}</div>
+      <td className={colpadding}>
+        <div className="leading-5 text-gray-900">{year}</div>
       </td>
-      <td className="px-6 py-4">
+      <td className={colpadding}>
         <NominateButton
           fromSlider={fromSlider}
           nominated={nominated}

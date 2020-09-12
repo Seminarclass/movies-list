@@ -19,10 +19,10 @@ export default function Table({ slider = false, data, nominations, onBtnClick }:
     <div className="flex-1 flex flex-col">
       <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div className={`
-          overflow-hidden border-dark
-          ${slider ? 'border-t border-b sm:border-r sm:border-l' : 'border'}
+          overflow-hidden border-gray-400
+          border rounded shadow
         `}>
-          <table className="min-w-full divide-y divide-dark">
+          <table className="min-w-full divide-y divide-gray-400">
             <TableHeader headers={headers} />
             <tbody className="bg-white divide-y divide-gray-200">
               {data.map(movie => (

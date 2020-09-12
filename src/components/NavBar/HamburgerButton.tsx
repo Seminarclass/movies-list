@@ -13,7 +13,7 @@ export default function HamburgerButton({ numItems, open, onClick }: HamburgerBu
     <button
       className="
         relative flex items-center justify-center w-10 p-2
-        rounded bg-white hover:bg-gray-200
+        shadow rounded bg-white hover:bg-gray-200
         transition duration-300 ease-in-out
         focus:outline-none
       "
@@ -28,7 +28,7 @@ export default function HamburgerButton({ numItems, open, onClick }: HamburgerBu
         <span className="
           absolute -top-0.5 -right-0.5
           flex items-center justify-center text-center
-          rounded-full
+          rounded-full shadow
           w-5 h-5
           bg-red-500 text-white text-xs
         ">

@@ -14,21 +14,43 @@ import Table from '../components/Table';
 import { Movies } from '../utils/constants';
 
 /*
+ * The Nominator Features:
+ *  * Search OMDB (limited to top 10 queries) for films
+ *  * Nominate your favorite films under the nomination list (via slider menu)
+ *  * Badge (by Hamburger Menu) to show the total number of nominated films
+ *  * Cookies to store session
+ *  * Notifications for searching, adding, removing films
+ *  * Sharable links via Firebase
+ * 
  * TODO:
+ * 0) agree to cookie bottom bar
  * 1) share nominations via url
- * 2) deploy online on Netlify
+ *   * click share button (can POST req if nomination > 0)
+ *   * save to Firebase with some giberish
+ *   * setup react router such that calling that route loads this nomination state from firebase
+ *     priority: route-based state via Firebase, cookie, no cookie
+ * 2) modal when clicking on titles from search table
+ * 3) Add react-transition-group
+ * 4) deploy online on Netlify
  */
 
 export default function AppPage() {
   const { addToast } = useToasts();
-  const [cookie, setCookie, removeCookie] = useCookies(['nominations']);
+
+  // agrees to cookie?
+  const [agreesToCookie, setAgreeToCookie] = useState<boolean>(false);
+  const [cookie, setCookie, removeCookie] = useCookies(['nominations', 'agreesToCookie']);
 
   // slider and nomination list states
   const [sliderOpen, setSliderOpen] = useState<boolean>(false);
   const [nominations, setNominations] = useState<Array<Movies>>(cookie.nominations !== undefined ? cookie.nominations : []);
   useEffect(() => {
-    setCookie('nominations', nominations, { maxAge: 3600 });  // cookie will expire in 1 hour
-  }, [nominations, setCookie]);
+    if (agreesToCookie) {
+      let tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      setCookie('nominations', nominations, { expires: tomorrow });
+    }
+  }, [agreesToCookie, nominations, setCookie]);
 
   // search results and query states
   const [searchResults, setSearchResults] = useState<Array<Movies>>([]);
