@@ -9,7 +9,11 @@ interface AppIconProps {
 export default function AppIcon({ link }: AppIconProps) {
   return (
     <a
-      className="flex items-center p-2 rounded bg-white"
+      className="
+        flex items-center p-2 rounded
+        bg-white hover:bg-gray-200
+        transition duration-300 ease-in-out
+      "
       href={link}
     >
       <FontAwesomeIcon

@@ -28,6 +28,8 @@ export default function SearchField({
               p-3
               flex items-center
               border border-dark bg-columbia
+              hover:bg-opacity-75
+              transition duration-300 ease-in-out
             "
             onClick={onClick}
           >

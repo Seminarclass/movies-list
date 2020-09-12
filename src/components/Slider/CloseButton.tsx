@@ -9,7 +9,11 @@ interface CloseButtonProps {
 export default function CloseButton({ onClick }: CloseButtonProps) {
   return (
     <button
-      className="h-7 flex items-center focus:outline-none"
+      className="
+        flex items-center justify-center
+        w-10 p-2 rounded bg-white hover:bg-gray-200 focus:outline-none
+        transition duration-300 ease-in-out
+      "
       onClick={onClick}
     >
       <FontAwesomeIcon

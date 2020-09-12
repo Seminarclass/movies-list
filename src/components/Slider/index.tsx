@@ -26,8 +26,8 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
           <div className="relative w-screen max-w-md">
             <div className="h-full flex flex-col space-y-6 py-6 bg-white shadow-xl overflow-y-scroll">
               <header className="px-4 sm:px-6 lg:px-8">
-                <div className="flex items-start justify-between space-x-3">
-                  <h2 className="flex items-center text-lg leading-7 font-extrabold text-dark">
+                <div className="flex items-center justify-between space-x-3">
+                  <h2 className="flex items-center text-lg leading-7">
                     <span className="
                       flex items-center justify-center text-center
                       rounded-full
@@ -36,7 +36,7 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
                     ">
                       {nominations.length}
                     </span>
-                    <span className="mx-4">
+                    <span className="font-black text-dark mx-4">
                       Nominated Film{nominations.length !== 1 ? 's' : ''}
                     </span>
                     <FontAwesomeIcon

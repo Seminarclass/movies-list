@@ -13,7 +13,8 @@ export default function HamburgerButton({ numItems, open, onClick }: HamburgerBu
     <button
       className="
         relative flex items-center justify-center w-10 p-2
-        rounded bg-white
+        rounded bg-white hover:bg-gray-200
+        transition duration-300 ease-in-out
         focus:outline-none
       "
       onClick={onClick}
