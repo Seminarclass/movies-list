@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { useToasts } from 'react-toast-notifications';
 import axios from 'axios';
 
@@ -20,10 +21,14 @@ import { Movies } from '../utils/constants';
 
 export default function AppPage() {
   const { addToast } = useToasts();
+  const [cookie, setCookie, removeCookie] = useCookies(['nominations']);
 
   // slider and nomination list states
   const [sliderOpen, setSliderOpen] = useState<boolean>(false);
-  const [nominations, setNominations] = useState<Array<Movies>>([]);
+  const [nominations, setNominations] = useState<Array<Movies>>(cookie.nominations !== undefined ? cookie.nominations : []);
+  useEffect(() => {
+    setCookie('nominations', nominations, { maxAge: 3600 });  // cookie will expire in 1 hour
+  }, [nominations, setCookie]);
 
   // search results and query states
   const [searchResults, setSearchResults] = useState<Array<Movies>>([]);
