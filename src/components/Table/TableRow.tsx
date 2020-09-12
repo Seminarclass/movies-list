@@ -3,13 +3,20 @@ import React from 'react';
 import NominateButton from './NominateButton';
 
 interface TableRowProps {
+  fromSlider?: boolean;
   title: string;
   year: string;
   nominated: boolean;
   onBtnClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function TableRow({ title, year, nominated, onBtnClick }: TableRowProps) {
+export default function TableRow({
+  fromSlider = false,
+  title,
+  year,
+  nominated,
+  onBtnClick
+}: TableRowProps) {
   return (
     <tr className="hover:bg-gray-50">
       <td className="px-6 py-4">
@@ -23,7 +30,11 @@ export default function TableRow({ title, year, nominated, onBtnClick }: TableRo
         <div className="text-sm leading-5 text-gray-900">{year}</div>
       </td>
       <td className="px-6 py-4">
-        <NominateButton nominated={nominated} onClick={onBtnClick} />
+        <NominateButton
+          fromSlider={fromSlider}
+          nominated={nominated}
+          onClick={onBtnClick}
+        />
       </td>
     </tr>
   );

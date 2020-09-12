@@ -7,15 +7,15 @@ import Header from '../components/Header';
 import Layout from '../components/Layout';
 import NavBar from '../components/NavBar';
 import SearchField from '../components/SearchField';
+import Slider from '../components/Slider';
 import Table from '../components/Table';
 
 import { Movies } from '../utils/constants';
 
 /*
  * TODO:
- * 1) NavBar slider menu for list of nominations
- * 3) share nominations via url
- * 4) deploy online on Netlify
+ * 1) share nominations via url
+ * 2) deploy online on Netlify
  */
 
 export default function AppPage() {
@@ -88,14 +88,12 @@ export default function AppPage() {
             onBtnClick={toggleNomination}
           />
         ) : null}
-        <br />
-        {sliderOpen ? (
-          <Table
-            data={nominations}
-            nominations={nominations}
-            onBtnClick={toggleNomination}
-          />
-        ) : null}
+        <Slider
+          open={sliderOpen}
+          setOpen={setSliderOpen}
+          nominations={nominations}
+          removeNomination={toggleNomination}
+        />
       </Layout>
       <Footer />
     </div>
