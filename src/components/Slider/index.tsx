@@ -23,7 +23,7 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
           onClick={() => { setOpen(prev => !prev); }}
         />
         <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
-          <div className="relative w-screen max-w-md">
+          <div className="relative w-screen max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
             <div className="h-full flex flex-col space-y-6 py-6 bg-white shadow-xl overflow-y-scroll">
               <header className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-start justify-between space-x-3">
