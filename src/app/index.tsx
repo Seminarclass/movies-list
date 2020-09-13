@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { useToasts } from 'react-toast-notifications';
 import axios from 'axios';
 
+import FixedFooter from '../components/FixedFooter';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
@@ -20,14 +21,13 @@ import { Movies } from '../utils/constants';
  *  * Badge (by Hamburger Menu) to show the total number of nominated films
  *  * Cookies to store session
  *  * Notifications for searching, adding, removing films
- *  * Sharable links via Firebase
+ *  * Sharable links
  * 
  * TODO:
- * 0) agree to cookie bottom bar
  * 1) share nominations via url
  *   * click share button (can POST req if nomination > 0)
  *   * save to Firebase with some giberish
- *   * setup react router such that calling that route loads this nomination state from firebase
+ *   * setup react router such that calling that route loads this nomination state
  *     priority: route-based state via Firebase, cookie, no cookie
  * 2) modal when clicking on titles from search table
  * 3) Add react-transition-group
@@ -38,8 +38,13 @@ export default function AppPage() {
   const { addToast } = useToasts();
 
   // agrees to cookie?
-  const [agreesToCookie, setAgreeToCookie] = useState<boolean>(false);
   const [cookie, setCookie, removeCookie] = useCookies(['nominations', 'agreesToCookie']);
+  const [agreesToCookie, setAgreeToCookie] = useState<boolean>(cookie.agreesToCookie !== undefined ? cookie.agreesToCookie : false);
+  useEffect(() => {
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setCookie('agreesToCookie', agreesToCookie, { expires: tomorrow });
+  }, [agreesToCookie, setCookie]);
 
   // slider and nomination list states
   const [sliderOpen, setSliderOpen] = useState<boolean>(false);
@@ -49,8 +54,10 @@ export default function AppPage() {
       let tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       setCookie('nominations', nominations, { expires: tomorrow });
+    } else {
+      removeCookie('nominations');
     }
-  }, [agreesToCookie, nominations, setCookie]);
+  }, [agreesToCookie, nominations, setCookie, removeCookie]);
 
   // search results and query states
   const [searchResults, setSearchResults] = useState<Array<Movies>>([]);
@@ -123,6 +130,10 @@ export default function AppPage() {
         />
       </Layout>
       <Footer />
+      <FixedFooter
+        accepted={agreesToCookie}
+        onAccept={() => { setAgreeToCookie(prev => !prev); }}
+      />
     </div>
   );
 }
