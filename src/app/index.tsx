@@ -43,7 +43,7 @@ export default function AppPage() {
   useEffect(() => {
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    setCookie('agreesToCookie', agreesToCookie, { expires: tomorrow });
+    setCookie('agreesToCookie', true, { expires: tomorrow });
   }, [agreesToCookie, setCookie]);
 
   // slider and nomination list states
