@@ -29,9 +29,11 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "build:css": "postcss ./tailwind.css -o ./src/index.css",
     "watch:css": "postcss ./tailwind.css -o ./src/index.css -w",
-    "start:react": "react-scripts start",
-    "dev": "run-p watch:css start:react",
+    "dev": "run-p watch:css start",
+    "deploy": "run-p build:css build",
+    "start": "react-scripts start", 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
