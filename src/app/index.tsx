@@ -21,7 +21,6 @@ import { Movies } from '../utils/constants';
  *  * Badge (by Hamburger Menu) to show the total number of nominated films
  *  * Cookies to store session
  *  * Notifications for searching, adding, removing films
- *  * Sharable links
  * 
  * TODO:
  * 1) share nominations via url
@@ -30,8 +29,7 @@ import { Movies } from '../utils/constants';
  *   * setup react router such that calling that route loads this nomination state
  *     priority: route-based state via Firebase, cookie, no cookie
  * 2) modal when clicking on titles from search table
- * 3) Add react-transition-group
- * 4) deploy online on Netlify
+ * 3) Add react-transition-group for animations
  */
 
 export default function AppPage() {
