@@ -26,7 +26,7 @@ export default function FixedFooter({ accepted, onAccept }: FixedFooterProps) {
           </div>
           <div className="flex items-center text-dark">
             <p className="flex text-xs my-3">
-              This site uses cookies to save your film nomination that expires in
+              This site uses cookies to save your film nominations that expire in
               24 hours. No other information is saved. By clicking 'Accept', you
               agree to the storing of cookies on your device.
             </p>
