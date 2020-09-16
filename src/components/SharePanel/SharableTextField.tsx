@@ -10,7 +10,7 @@ export default function SharableTextField({ generatedURL }: SharableTextFieldPro
       relative rounded border-gray-400 shadow
       form-input flex flex-wrap w-full bg-gray-50
     ">
-      {window.location.hostname}/{generatedURL}
+      https://{window.location.hostname}/{generatedURL}
     </div>
   );
 }
