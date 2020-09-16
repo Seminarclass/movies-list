@@ -32,7 +32,7 @@ export default function SharePanel({ nominations, stateModified }: SharePanelPro
   };
 
   const copyToClipboard = () => {
-    copy(`${window.location.hostname}/${sharableURL}`);
+    copy(`https://${window.location.hostname}/${sharableURL}`);
     addToast('Copied to Clipboard!', { appearance: 'success' });
   };
 
