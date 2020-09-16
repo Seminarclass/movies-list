@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useParams } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 import axios from 'axios';
 
@@ -12,6 +13,8 @@ import SearchField from '../components/SearchField';
 import Slider from '../components/Slider';
 import Table from '../components/Table';
 
+import { getNominationList } from '../services/firestore';
+
 import { Movies } from '../utils/constants';
 
 /*
@@ -21,43 +24,82 @@ import { Movies } from '../utils/constants';
  *  * Badge (by Hamburger Menu) to show the total number of nominated films
  *  * Cookies to store session
  *  * Notifications for searching, adding, removing films
+ *  * Sharable URL Links via Firebase (copy to clipboard)
  * 
  * TODO:
- * 1) share nominations via url
- *   * click share button (can POST req if nomination > 0)
- *   * save to Firebase with some giberish
- *   * setup react router such that calling that route loads this nomination state
- *     priority: route-based state via Firebase, cookie, no cookie
- * 2) modal when clicking on titles from search table
- * 3) Add react-transition-group for animations
+ * 0) clean up app states with either Unstated Next or Redux
+ * 1) modal when clicking on titles from search table
+ * 2) Add react-transition-group for animations
  */
 
 export default function AppPage() {
   const { addToast } = useToasts();
 
-  // agrees to cookie?
-  const [cookie, setCookie, removeCookie] = useCookies(['nominations', 'agreesToCookie']);
-  const [agreesToCookie, setAgreeToCookie] = useState<boolean>(cookie.agreesToCookie !== undefined ? cookie.agreesToCookie : false);
+  // SHARABLE LINK
+  const { id } = useParams();
+  useEffect(() => {
+    if (id !== undefined) {
+      getNominationList(id)
+        .then(doc => {
+          const res = doc.data();
+          if (res !== undefined) {
+            setNominations(res.nominations);
+          } else {
+            addToast('Uh oh... Invalid URL!', { appearance: 'error' });
+          }
+        })
+        .catch(err => {
+          console.log('Error adding document:', err);
+        });
+    }
+  }, [addToast, id]);
+
+  // COOKIE AND AGREES TO COOKIE?
+  const [cookie, setCookie, removeCookie] = useCookies([
+    'nominations',
+    'agreesToCookie'
+  ]);
+  const [agreesToCookie, setAgreeToCookie] = useState<boolean>(
+    cookie.agreesToCookie !== undefined ? cookie.agreesToCookie : false
+  );
   useEffect(() => {
     let tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     setCookie('agreesToCookie', true, { expires: tomorrow });
   }, [agreesToCookie, setCookie]);
 
-  // slider and nomination list states
+  // SLIDER OPEN? NOMINATION LIST
   const [sliderOpen, setSliderOpen] = useState<boolean>(false);
-  const [nominations, setNominations] = useState<Array<Movies>>(cookie.nominations !== undefined ? cookie.nominations : []);
+  const [touched, setTouched] = useState<boolean>(cookie.nominations !== undefined);
+  const [nominations, setNominations] = useState<Array<Movies>>(
+    cookie.nominations !== undefined ? cookie.nominations : []
+  );
   useEffect(() => {
-    if (agreesToCookie) {
-      let tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      setCookie('nominations', nominations, { expires: tomorrow });
-    } else {
-      removeCookie('nominations');
+    // if opening shared URL, don't save to cookie
+    if (id === undefined) {
+      if (agreesToCookie) {
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        setCookie('nominations', nominations, { expires: tomorrow });
+      } else {
+        removeCookie('nominations');
+      }
     }
-  }, [agreesToCookie, nominations, setCookie, removeCookie]);
+  }, [agreesToCookie, nominations, setCookie, removeCookie, id]);
 
-  // search results and query states
+  const toggleNomination = (newItem: Movies) => {
+    const isNominated = nominations.some(movie => movie.imdbID === newItem.imdbID);
+    if (isNominated) {
+      setNominations(nominations.filter(movie => movie.imdbID !== newItem.imdbID));
+      addToast(`Removed "${newItem.Title}" from nomination!`, { appearance: 'error' });
+    } else {
+      setNominations(prevState => [...prevState, newItem]);
+      addToast(`Added "${newItem.Title}" to nomination!`, { appearance: 'success' });
+    }
+    setTouched(true);
+  };
+
+  // SEARCH RESULTS AND OMDB API CALL
   const [searchResults, setSearchResults] = useState<Array<Movies>>([]);
   const [query, setQuery] = useState<string>('');
 
@@ -81,17 +123,6 @@ export default function AppPage() {
       }
     } catch (e) {
       console.log(e);
-    }
-  };
-
-  const toggleNomination = (newItem: Movies) => {
-    const isNominated = nominations.some(movie => movie.imdbID === newItem.imdbID);
-    if (isNominated) {
-      setNominations(nominations.filter(movie => movie.imdbID !== newItem.imdbID));
-      addToast(`Removed "${newItem.Title}" from nomination!`, { appearance: 'error' });
-    } else {
-      setNominations(prevState => [...prevState, newItem]);
-      addToast(`Added "${newItem.Title}" to nomination!`, { appearance: 'success' });
     }
   };
 
@@ -124,6 +155,7 @@ export default function AppPage() {
           open={sliderOpen}
           setOpen={setSliderOpen}
           nominations={nominations}
+          stateModified={touched}
           removeNomination={toggleNomination}
         />
       </Layout>

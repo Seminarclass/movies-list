@@ -12,15 +12,19 @@ The Nominator is a React App that allows users to:
 - Nominated film count to show the total number of nominations (via hamburger menu)
 - Cookies to persist nominations list
 - Toaster notifications for searching (and REQ error), adding, and removing films
+- Firebase Firestore for sharing nominations list via URL
 
-Built with **React** + **TypeScript** and **Tailwind CSS** with continuous deployment to **Netlify**.
+Built with **React** + **TypeScript** and **Tailwind CSS** with **Firebase Firestore** persistence; continuous deployment to **Netlify**.
 
 ## Notable Dependencies
 
 - `axios`
+- `copy-to-clipboard`
 - `dotenv`
+- `firebase`: Firestore
 - `@fortawesome`: brands, regular, solid
 - `react-cookie`
+- `react-router-dom`: For `useParams` hook to get URL parameters
 - `react-toast-notifications`
 - `tailwindcss`
 - `tailwindcss/ui`

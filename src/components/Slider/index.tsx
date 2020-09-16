@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 import CloseButton from './CloseButton';
+import SharePanel from '../SharePanel';
 import Table from '../Table'
 
 import { Movies } from '../../utils/constants';
@@ -11,10 +12,18 @@ interface SliderProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   nominations: Array<Movies>;
+  stateModified: boolean;
   removeNomination: (newItem: Movies) => void;
 }
 
-export default function Slider({ open, setOpen, nominations, removeNomination }: SliderProps) {
+export default function Slider({
+  open,
+  setOpen,
+  nominations,
+  stateModified,
+  removeNomination
+}: SliderProps) {
+
   return open ? (
     <div className="fixed inset-0 overflow-hidden z-50">
       <div className="absolute inset-0 overflow-hidden">
@@ -51,6 +60,9 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
               <div className="relative flex-1 px-4 sm:px-6">
                 <div className="absolute inset-0 px-4 sm:px-6">
                   {nominations.length > 0 ? (
+                    <SharePanel nominations={nominations} stateModified={stateModified} />
+                  ) : null}
+                  {nominations.length > 0 ? (
                     <Table
                       slider
                       data={nominations}
@@ -62,7 +74,7 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
                       flex items-center justify-center h-full
                       font-light text-gray-400
                     ">
-                      Search and nominate some films!
+                      Search and nominate films!
                     </div>
                   )}
                 </div>
