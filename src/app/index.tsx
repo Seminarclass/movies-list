@@ -24,9 +24,10 @@ import { Movies } from '../utils/constants';
  *  * Badge (by Hamburger Menu) to show the total number of nominated films
  *  * Cookies to store session
  *  * Notifications for searching, adding, removing films
- *  * Sharable URL Links via Firebase
+ *  * Sharable URL Links via Firebase (copy to clipboard)
  * 
  * TODO:
+ * 0) clean up app states with either Unstated Next or Redux
  * 1) modal when clicking on titles from search table
  * 2) Add react-transition-group for animations
  */
@@ -69,6 +70,7 @@ export default function AppPage() {
 
   // SLIDER OPEN? NOMINATION LIST
   const [sliderOpen, setSliderOpen] = useState<boolean>(false);
+  const [touched, setTouched] = useState<boolean>(cookie.nominations !== undefined);
   const [nominations, setNominations] = useState<Array<Movies>>(
     cookie.nominations !== undefined ? cookie.nominations : []
   );
@@ -94,6 +96,7 @@ export default function AppPage() {
       setNominations(prevState => [...prevState, newItem]);
       addToast(`Added "${newItem.Title}" to nomination!`, { appearance: 'success' });
     }
+    setTouched(true);
   };
 
   // SEARCH RESULTS AND OMDB API CALL
@@ -152,6 +155,7 @@ export default function AppPage() {
           open={sliderOpen}
           setOpen={setSliderOpen}
           nominations={nominations}
+          stateModified={touched}
           removeNomination={toggleNomination}
         />
       </Layout>
