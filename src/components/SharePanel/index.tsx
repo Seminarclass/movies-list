@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 import copy from 'copy-to-clipboard';
