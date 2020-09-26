@@ -5,7 +5,7 @@ import TableRow from './TableRow';
 
 import { Movies } from '../../utils/constants';
 
-const headers = ['Title', 'Year', 'Status']
+const headers = ['Title', 'Year', 'Status'];
 
 interface TableProps {
   slider?: boolean;

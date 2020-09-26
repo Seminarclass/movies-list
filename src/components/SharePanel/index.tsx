@@ -49,14 +49,14 @@ export default function SharePanel({ nominations, stateModified }: SharePanelPro
               {sharedLink ? 'Cool person shared this list!' : 'Generate sharable link!'}
             </p>
           </div>
-          <div className="mt-4 sm:flex sm:items-center">
+          <div className="mt-4 md:flex md:items-center">
             {sharedLink ? (
               <div className="w-full">
                 <SharableTextField generatedURL={sharableURL} />
               </div>
             ) : null}
-            <span className={`mt-4 inline-flex rounded shadow sm:mt-0 ${
-              sharedLink ? 'sm:ml-4' : ''
+            <span className={`mt-4 inline-flex rounded shadow md:mt-0 ${
+              sharedLink ? 'md:ml-4' : ''
               } sm:w-auto`
             }>
               {sharedLink ? (

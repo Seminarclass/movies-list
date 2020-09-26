@@ -17,7 +17,7 @@ export default function TableRow({
   nominated,
   onBtnClick
 }: TableRowProps) {
-  const colpadding = 'px-3 py-2 sm:px-6 sm:py-4'
+  const colpadding = 'px-3 py-2 sm:px-6 sm:py-4';
   return (
     <tr className="text-sm hover:bg-gray-50">
       <td className={colpadding}>
