@@ -18,7 +18,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 /*
- * GET { nominations, created } from Firestore
+ * GET { nominations, name, created } from Firestore
  */
 export const getNominationList = (sessionId: string) => {
   const db = firebase.firestore();
@@ -28,15 +28,16 @@ export const getNominationList = (sessionId: string) => {
 };
 
 /*
- * ADD { nominations, created } to Firestore
+ * ADD { nominations, name, created } to Firestore
  * Use the return id as the sharable URL
  */
-export const setNominationList = (nominations: Array<Movies>) => {
+export const setNominationList = (userName: string, nominations: Array<Movies>) => {
   const db = firebase.firestore();
   const sessionsRef = db.collection('sessions');
 
   return sessionsRef.add({
     created: firebase.firestore.FieldValue.serverTimestamp(),
+    name: userName,
     nominations: nominations
   });
 };

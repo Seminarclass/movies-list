@@ -30,7 +30,8 @@
     "react-scripts": "3.4.3",
     "react-toast-notifications": "^2.4.0",
     "tailwindcss": "^1.8.5",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "unstated-next": "^1.1.0"
   },
   "scripts": {
     "build:css": "postcss ./tailwind.css -o ./src/index.css",

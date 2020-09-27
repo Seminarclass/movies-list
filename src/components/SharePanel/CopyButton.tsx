@@ -2,6 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 
+import Button from '../Button';
+
 interface CopyButtonProps {
   className?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -9,17 +11,8 @@ interface CopyButtonProps {
 
 export default function CopyButton({ className, onClick }: CopyButtonProps) {
   return (
-    <button
-      type="button"
-      className={`
-        w-full flex items-center justify-center
-        px-4 py-2
-        border border-columbia rounded
-        font-medium text-white
-        bg-columbia hover:bg-opacity-75 hover:border-opacity-75
-        focus:outline-none transition ease-in-out duration-150
-        ${className}
-      `}
+    <Button
+      className={className}
       onClick={onClick}
     >
       <FontAwesomeIcon
@@ -28,6 +21,6 @@ export default function CopyButton({ className, onClick }: CopyButtonProps) {
         size="sm"
       />
       Copy
-    </button>
+    </Button>
   );
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import NominateButton from './NominateButton';
 
 interface TableRowProps {
+  fromShared?: boolean;
   fromSlider?: boolean;
   title: string;
   year: string;
@@ -11,6 +12,7 @@ interface TableRowProps {
 }
 
 export default function TableRow({
+  fromShared = false,
   fromSlider = false,
   title,
   year,
@@ -30,13 +32,15 @@ export default function TableRow({
       <td className={colpadding}>
         <div className="leading-5 text-gray-900">{year}</div>
       </td>
-      <td className={colpadding}>
-        <NominateButton
-          fromSlider={fromSlider}
-          nominated={nominated}
-          onClick={onBtnClick}
-        />
-      </td>
+      {fromShared ? null : (
+        <td className={colpadding}>
+          <NominateButton
+            fromSlider={fromSlider}
+            nominated={nominated}
+            onClick={onBtnClick}
+          />
+        </td>
+      )}
     </tr>
   );
 }
