@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faColumns } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 import FooterLink from './FooterLink';
 
@@ -12,15 +12,11 @@ const footerSocial = [
   },
   {
     icon: faGithub,
-    link: 'https://github.com/michaelihwang'
+    link: 'https://github.com/michaelihwang/nominator'
   },
   {
     icon: faLinkedinIn,
     link: 'https://www.linkedin.com/in/michaelihwang/'
-  },
-  {
-    icon: faTwitter,
-    link: 'https://twitter.com/michaelihwang'
   },
 ];
 

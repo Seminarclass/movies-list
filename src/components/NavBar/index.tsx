@@ -5,17 +5,23 @@ import AppIcon from './AppIcon';
 import ShareButton from './ShareButton';
 import HamburgerButton from './HamburgerButton';
 
+import GlobalState from '../../hooks/useGlobalState';
+
 interface NavBarProps {
-  numItems: number;
-  sliderOpen: boolean;
-  onSliderOpen: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  sliderOpen?: boolean;
+  onSliderOpen?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function NavBar({ numItems, sliderOpen, onSliderOpen }: NavBarProps) {
+export default function NavBar({ sliderOpen, onSliderOpen }: NavBarProps) {
+  const {
+    cookie, removeCookie,
+    nominations, setNominations,
+    setUserName
+  } = GlobalState.useContainer();
   const { addToast } = useToasts();
-  
+
   const handleShareClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (numItems > 0) {
+    if (nominations.length > 0 && onSliderOpen !== undefined) {
       onSliderOpen(event);
     } else {
       addToast('Nominate films to generate sharable link!', {
@@ -24,21 +30,44 @@ export default function NavBar({ numItems, sliderOpen, onSliderOpen }: NavBarPro
     }
   }
 
+  const handleGoHome = () => {
+    setUserName('');
+    setNominations(cookie.nominations !== undefined ? cookie.nominations : []);
+  };
+
+  const handleEditList = () => {
+    setUserName('');
+    removeCookie('nominations');
+  };
+
   return (
     <nav className="fixed w-full bg-columbia z-40">
       <div className="max-w-screen-xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <AppIcon link="/" />
+          <AppIcon
+            logo
+            onClick={handleGoHome}
+            text="The Nominator"
+          />
           <div className="flex">
-            <ShareButton
-              className="mr-4"
-              onClick={handleShareClick}
-            />
-            <HamburgerButton
-              numItems={numItems}
-              open={sliderOpen}
-              onClick={onSliderOpen}
-            />
+            {sliderOpen !== undefined && onSliderOpen !== undefined ? (
+              <>
+                <ShareButton
+                  className="mr-4"
+                  onClick={handleShareClick}
+                />
+                <HamburgerButton
+                  numItems={nominations.length}
+                  open={sliderOpen}
+                  onClick={onSliderOpen}
+                />
+              </>
+            ) : (
+              <AppIcon
+                text="Edit List"
+                onClick={handleEditList}
+              />
+            )}
           </div>
         </div>
       </div>

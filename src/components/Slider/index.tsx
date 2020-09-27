@@ -6,24 +6,15 @@ import CloseButton from './CloseButton';
 import SharePanel from '../SharePanel';
 import Table from '../Table'
 
-import { Movies } from '../../utils/constants';
+import GlobalState from '../../hooks/useGlobalState';
 
 interface SliderProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  nominations: Array<Movies>;
-  stateModified: boolean;
-  removeNomination: (newItem: Movies) => void;
 }
 
-export default function Slider({
-  open,
-  setOpen,
-  nominations,
-  stateModified,
-  removeNomination
-}: SliderProps) {
-
+export default function Slider({ open, setOpen }: SliderProps) {
+  const { nominations, toggleNomination } = GlobalState.useContainer();
   return open ? (
     <div className="fixed inset-0 overflow-hidden z-50">
       <div className="absolute inset-0 overflow-hidden">
@@ -32,17 +23,27 @@ export default function Slider({
           onClick={() => { setOpen(prev => !prev); }}
         />
         <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
-          <div className="relative w-screen max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-            <div className="h-full flex flex-col space-y-6 py-6 bg-white shadow-xl overflow-y-scroll">
+          <div className={`
+            relative w-screen
+            max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl
+          `}>
+            <div className={`
+              flex flex-col
+              h-full space-y-6 py-6 overflow-y-scroll
+              bg-white shadow-xl
+            `}>
               <header className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-start justify-between space-x-3">
-                  <h2 className="flex items-center text-lg leading-7 font-extrabold text-dark">
-                    <span className="
+                  <h2 className={`
+                    flex items-center
+                    text-lg leading-7 font-extrabold text-dark
+                  `}>
+                    <span className={`
                       flex items-center justify-center text-center
                       rounded-full
                       w-5 h-5
                       bg-red-500 text-white text-xs
-                    ">
+                    `}>
                       {nominations.length}
                     </span>
                     <span className="mx-4">
@@ -59,21 +60,14 @@ export default function Slider({
               </header>
               <div className="relative flex-1 px-4 sm:px-6">
                 <div className="absolute inset-0 px-4 sm:px-6">
+                  {nominations.length > 0 ? <SharePanel /> : null}
                   {nominations.length > 0 ? (
-                    <SharePanel nominations={nominations} stateModified={stateModified} />
-                  ) : null}
-                  {nominations.length > 0 ? (
-                    <Table
-                      slider
-                      data={nominations}
-                      nominations={nominations}
-                      onBtnClick={removeNomination}
-                    />
+                    <Table slider data={nominations} onBtnClick={toggleNomination} />
                   ) : (
-                    <div className="
+                    <div className={`
                       flex items-center justify-center h-full
                       font-light text-gray-400
-                    ">
+                    `}>
                       Search and nominate films!
                     </div>
                   )}
