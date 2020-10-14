@@ -5,12 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ![Screenshot](/public/home.png?raw=true "App Screenshot")
 
 The Nominator is a React App that allows users to:
-- Search OMDB (GET REQ limited to 10 results) for films
-- Nominate searched films in the nomination list (via slider menu)
-- Nominated film count to show the total number of nominations (via hamburger menu)
-- Cookies to persist nominations list
-- Toaster notifications for searching (and REQ error), adding, and removing films
-- Firebase Cloud Firestore for sharing nominations list via URL
+- Search OMDB (GET REQ limited to 10 results) for movies
+- Favorite searched movies into the nomination watchlist (via slider menu)
+- Firebase Cloud Firestore for generating sharable URL and persisting the watchlist (list of movies for the next movie night!)
+- Cookies to persist nominations watchlist
 
 Built with **React** + **TypeScript** and **Tailwind CSS** with **Firebase Firestore** persistence and deployed to **Netlify**.
 
