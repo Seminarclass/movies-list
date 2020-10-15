@@ -8,6 +8,7 @@ interface TableRowProps {
   poster: string;
   title: string;
   year: string;
+  imdbID: string;
   nominated: boolean;
   onFavorite?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
@@ -18,12 +19,15 @@ export default function TableRow({
   poster,
   title,
   year,
+  imdbID,
   nominated,
-  onFavorite
+  onFavorite = e => {}
 }: TableRowProps) {
+  const openIMDBLink = () => window.open(`https://www.imdb.com/title/${imdbID}/`, "_blank")
+
   const colpadding = 'px-3 py-2 sm:px-6 sm:py-4';
   return (
-    <tr className="text-sm hover:bg-gray-50">
+    <tr className="text-sm cursor-pointer hover:bg-gray-50" onClick={openIMDBLink}>
       <td className={colpadding}>
         <img className="object-scale-down w-full h-32" src={poster} alt={title} />
       </td>
@@ -39,7 +43,10 @@ export default function TableRow({
           <NominateButton
             fromSlider={fromSlider}
             nominated={nominated}
-            onClick={onFavorite}
+            onClick={e => {
+              e.stopPropagation();
+              onFavorite(e);
+            }}
           />
         </td>
       )}

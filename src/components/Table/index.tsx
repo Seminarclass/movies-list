@@ -38,6 +38,7 @@ export default function Table({
                   poster={movie.Poster}
                   title={movie.Title}
                   year={movie.Year}
+                  imdbID={movie.imdbID}
                   fromShared={shared}
                   fromSlider={slider}
                   nominated={nominations.some(nom => nom.imdbID === movie.imdbID)}
