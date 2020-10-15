@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        columbia: '#B3D8F2',
+        columbia: '#7EC2F5',
         dark: '#201D1D',
       },
       spacing: {

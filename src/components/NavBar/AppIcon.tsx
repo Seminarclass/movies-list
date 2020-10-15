@@ -1,29 +1,38 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 
 interface AppIconProps {
-  link: string;
+  logo?: boolean;
+  onClick?: () => void;
+  text: string;
 }
 
-export default function AppIcon({ link }: AppIconProps) {
+export default function AppIcon({ logo = false, onClick = () => {}, text }: AppIconProps) {
+  const history = useHistory();
+  
   return (
-    <a
+    <button
       className={`
         flex items-center p-2 rounded
-        bg-white hover:bg-gray-200 shadow
+      bg-white hover:bg-gray-200 shadow
         transition duration-300 ease-in-out
       `}
-      href={link}
+      onClick={() => {
+        onClick();
+        history.push('/');
+      }}
     >
       <FontAwesomeIcon
         className="text-dark"
-        icon={faFilm}
+        icon={logo ? faFilm : faEdit}
         size="lg"
       />
       <p className="ml-2 italic font-medium truncate text-dark">
-        The Nominator
+        {text}
       </p>
-    </a>
+    </button>
   );
 }

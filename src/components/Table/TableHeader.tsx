@@ -5,7 +5,7 @@ interface TableHeaderProps {
 }
 
 export default function TableHeader({ headers }: TableHeaderProps) {
-  const colpadding = 'px-3 py-2 sm:px-6 sm:py-4'
+  const colpadding = 'px-3 py-2 sm:px-6 sm:py-4';
   return (
     <thead>
       <tr>

@@ -22,7 +22,7 @@ export default function SearchField({
       <div className="max-w-xl w-full">
         <div className="relative">
           <button
-            className="
+            className={`
               absolute inset-y-0 left-0
               focus:outline-none
               p-3
@@ -30,7 +30,7 @@ export default function SearchField({
               border border-gray-400 bg-columbia rounded-tl rounded-bl
               hover:bg-opacity-75
               transition duration-300 ease-in-out
-            "
+            `}
             onClick={onClick}
           >
             <FontAwesomeIcon
@@ -45,7 +45,7 @@ export default function SearchField({
           }}>
             <input
               id="search"
-              className="
+              className={`
                 block w-full
                 pl-12 pr-3 py-2
                 border border-gray-400 rounded shadow
@@ -53,7 +53,7 @@ export default function SearchField({
                 focus:outline-none
                 sm:text-sm text-dark
                 transition duration-150 ease-in-out
-              "
+              `}
               placeholder={placeholder}
               type="search"
               value={value}

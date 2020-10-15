@@ -19,12 +19,6 @@ export default function SharePanel() {
   const { addToast } = useToasts();
 
   const generateSharableLink = () => {
-    if (nominations.length === 0) {
-      addToast('Nominate movies to generate a sharable link!', {
-        appearance: 'error'
-      });
-    }
-
     if (userName === '') {
       addToast('Username is reqired!', { appearance: 'error' });
       return;

@@ -4,23 +4,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![Screenshot](/public/home.png?raw=true "App Screenshot")
 
-My take on Shopify's UX & Web Developer Challenge - [The Shoppies: Movie awards for entrepreneurs](https://tinyurl.com/yx9vsbj6)
-
 The Nominator is a React App that allows users to:
-- Search OMDB (GET REQ limited to 10 results) for films
-- Nominate searched films in the nomination list (via slider menu)
-- Nominated film count to show the total number of nominations (via hamburger menu)
-- Cookies to persist nominations list
-- Toaster notifications for searching (and REQ error), adding, and removing films
+- Search OMDB (GET REQ limited to 10 results) for movies
+- Favorite searched movies into the nomination watchlist (via slider menu)
+- Firebase Cloud Firestore for generating sharable URL and persisting the watchlist (list of movies for the next movie night!)
+- Cookies to persist nominations watchlist
 
-Built with **React** + **TypeScript** and **Tailwind CSS** with continuous deployment to **Netlify**.
+Built with **React** + **TypeScript** and **Tailwind CSS** with **Firebase Firestore** persistence and deployed to **Netlify**.
 
 ## Notable Dependencies
 
 - `axios`
+- `copy-to-clipboard`
 - `dotenv`
+- `firebase`: Firestore
 - `@fortawesome`: brands, regular, solid
 - `react-cookie`
+- `react-router-dom`: For `useParams` hook to get URL parameters
 - `react-toast-notifications`
 - `tailwindcss`
 - `tailwindcss/ui`

@@ -2,14 +2,15 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-interface FixedFooterProps {
-  accepted: boolean;
-  onAccept: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}
+import GlobalState from '../../hooks/useGlobalState';
 
-export default function FixedFooter({ accepted, onAccept }: FixedFooterProps) {
+export default function FixedFooter() {
+  const { agreesToCookie, setAgreeToCookie } = GlobalState.useContainer();
+
+  const handleAcceptCookie = () => { setAgreeToCookie(prev => !prev); };
+
   return (
-    <div className={`fixed inset-x-0 bottom-0 ${accepted ? 'hidden' : ''}`}>
+    <div className={`fixed inset-x-0 bottom-0 ${agreesToCookie ? 'hidden' : ''}`}>
       <div className="bg-columbia">
         <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
           <div className="flex-1 flex items-center">
@@ -26,21 +27,21 @@ export default function FixedFooter({ accepted, onAccept }: FixedFooterProps) {
           </div>
           <div className="flex items-center text-dark">
             <p className="flex text-xs my-3">
-              This site uses cookies to save your film nomination that expires in
+              This site uses cookies to save your film nominations that expire in
               24 hours. No other information is saved. By clicking 'Accept', you
               agree to the storing of cookies on your device.
             </p>
           </div>
           <div className="flex items-center justify-end">
             <button
-              className="
+              className={`
                 flex items-center justify-center
                 px-4 py-2 border border-transparent rounded shadow
                 text-sm leading-5 font-medium text-white
                 bg-green-400 hover:bg-green-600 focus:outline-none
                 transition ease-in-out duration-150
-              "
-              onClick={onAccept}
+              `}
+              onClick={handleAcceptCookie}
             >
               Accept and Close
             </button>
