@@ -7,9 +7,9 @@ interface InputFieldProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchField({
+export default function InputField({
   className = '',
-  placeholder = 'Enter your name here',
+  placeholder = 'Your name here!',
   value,
   onChange
 }: InputFieldProps) {
@@ -21,7 +21,7 @@ export default function SearchField({
         leading-5 bg-white
         focus:outline-none
         sm:text-sm text-dark
-        transition duration-150 ease-in-out
+        w-40 sm:w-auto
         ${className}
       `}
       placeholder={placeholder}

@@ -5,39 +5,48 @@ import NominateButton from './NominateButton';
 interface TableRowProps {
   fromShared?: boolean;
   fromSlider?: boolean;
+  poster: string;
   title: string;
   year: string;
+  imdbID: string;
   nominated: boolean;
-  onBtnClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onFavorite?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export default function TableRow({
   fromShared = false,
   fromSlider = false,
+  poster,
   title,
   year,
+  imdbID,
   nominated,
-  onBtnClick
+  onFavorite = e => {}
 }: TableRowProps) {
+  const openIMDBLink = () => window.open(`https://www.imdb.com/title/${imdbID}/`, "_blank")
+
   const colpadding = 'px-3 py-2 sm:px-6 sm:py-4';
   return (
-    <tr className="text-sm hover:bg-gray-50">
+    <tr className="text-sm cursor-pointer hover:bg-gray-50" onClick={openIMDBLink}>
       <td className={colpadding}>
-        <div className="flex items-center flex-wrap">
-          <div className="leading-5 font-medium text-gray-900">
-            {title}
-          </div>
-        </div>
+        <img className="object-scale-down w-full h-32" src={poster} alt={title} />
       </td>
       <td className={colpadding}>
-        <div className="leading-5 text-gray-900">{year}</div>
+        <div className="flex flex-wrap items-center">
+          <div className="font-medium leading-5 text-gray-900">
+            {title} ({year})
+          </div>
+        </div>
       </td>
       {fromShared ? null : (
         <td className={colpadding}>
           <NominateButton
             fromSlider={fromSlider}
             nominated={nominated}
-            onClick={onBtnClick}
+            onClick={e => {
+              e.stopPropagation();
+              onFavorite(e);
+            }}
           />
         </td>
       )}

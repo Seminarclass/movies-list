@@ -6,7 +6,7 @@ import TableRow from './TableRow';
 import GlobalState from '../../hooks/useGlobalState';
 import { Movies } from '../../utils/constants';
 
-const headers = ['Title', 'Year'];
+const headers = ['', 'Title'];
 
 interface TableProps {
   shared?: boolean;
@@ -23,8 +23,8 @@ export default function Table({
 }: TableProps) {
   const { nominations } = GlobalState.useContainer();
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+    <div className="flex flex-col flex-1">
+      <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
         <div className={`
           overflow-hidden border-gray-400
           border rounded shadow
@@ -35,12 +35,14 @@ export default function Table({
               {data.map(movie => (
                 <TableRow
                   key={movie.imdbID}
+                  poster={movie.Poster}
                   title={movie.Title}
                   year={movie.Year}
+                  imdbID={movie.imdbID}
                   fromShared={shared}
                   fromSlider={slider}
                   nominated={nominations.some(nom => nom.imdbID === movie.imdbID)}
-                  onBtnClick={() => onBtnClick(movie)}
+                  onFavorite={() => onBtnClick(movie)}
                 />
               ))}
             </tbody>

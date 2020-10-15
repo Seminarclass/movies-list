@@ -10,11 +10,11 @@ import GlobalState from './hooks/useGlobalState';
 
 /*
  * The Nominator Features:
- *  * Search OMDB (limited to top 10 queries) for films
- *  * Nominate your favorite films under the nomination list (via slider menu)
- *  * Badge (by Hamburger Menu) to show the total number of nominated films
+ *  * Search OMDB (limited to top 10 queries) for movies
+ *  * Nominate your favorite movies under the nomination list (via slider menu)
+ *  * Badge (by Hamburger Menu) to show the total number of nominated movies
  *  * Cookies to store session
- *  * Notifications for searching, adding, removing films
+ *  * Notifications for searching, adding, removing movies
  *  * Sharable URL Links via Firebase (copy to clipboard)
  *
  * TODO:

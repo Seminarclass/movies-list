@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="flex flex-col items-center justify-center text-gray-400">
       {id ? (
-        <p className="text-xl mt-10">
+        <p className="mt-10 text-xl">
           <b className="text-dark">{userName}</b> shared this movie list with you!
         </p>
       ) : (
@@ -22,7 +22,7 @@ export default function Header() {
               alt="icon"
             />
             <p>
-              Search to nominate films
+              Search to build watchlist for the next movie night!
             </p>
           </>
       )}

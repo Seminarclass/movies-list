@@ -16,13 +16,13 @@ interface SliderProps {
 export default function Slider({ open, setOpen }: SliderProps) {
   const { nominations, toggleNomination } = GlobalState.useContainer();
   return open ? (
-    <div className="fixed inset-0 overflow-hidden z-50">
+    <div className="fixed inset-0 z-50 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          className="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75"
           onClick={() => { setOpen(prev => !prev); }}
         />
-        <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
+        <section className="absolute inset-y-0 right-0 flex max-w-full pl-10">
           <div className={`
             relative w-screen
             max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl
@@ -68,7 +68,7 @@ export default function Slider({ open, setOpen }: SliderProps) {
                       flex items-center justify-center h-full
                       font-light text-gray-400
                     `}>
-                      Search and nominate films!
+                      Search and nominate movies!
                     </div>
                   )}
                 </div>
