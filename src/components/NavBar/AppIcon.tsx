@@ -9,11 +9,11 @@ interface AppIconProps {
 export default function AppIcon({ link }: AppIconProps) {
   return (
     <a
-      className="
+      className={`
         flex items-center p-2 rounded
         bg-white hover:bg-gray-200 shadow
         transition duration-300 ease-in-out
-      "
+      `}
       href={link}
     >
       <FontAwesomeIcon
@@ -21,7 +21,7 @@ export default function AppIcon({ link }: AppIconProps) {
         icon={faFilm}
         size="lg"
       />
-      <p className="ml-2 font-medium truncate italic text-dark">
+      <p className="ml-2 italic font-medium truncate text-dark">
         The Nominator
       </p>
     </a>

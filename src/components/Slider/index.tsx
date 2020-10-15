@@ -16,24 +16,19 @@ interface SliderProps {
 
 export default function Slider({ open, setOpen, nominations, removeNomination }: SliderProps) {
   return open ? (
-    <div className="fixed inset-0 overflow-hidden z-50">
+    <div className="fixed inset-0 z-50 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          className="absolute inset-0 transition-opacity bg-gray-500 bg-opacity-75"
           onClick={() => { setOpen(prev => !prev); }}
         />
-        <section className="absolute inset-y-0 right-0 pl-10 max-w-full flex">
+        <section className="absolute inset-y-0 right-0 flex max-w-full pl-10">
           <div className="relative w-screen max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
-            <div className="h-full flex flex-col space-y-6 py-6 bg-white shadow-xl overflow-y-scroll">
+            <div className="flex flex-col h-full py-6 space-y-6 overflow-y-scroll bg-white shadow-xl">
               <header className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-start justify-between space-x-3">
-                  <h2 className="flex items-center text-lg leading-7 font-extrabold text-dark">
-                    <span className="
-                      flex items-center justify-center text-center
-                      rounded-full
-                      w-5 h-5
-                      bg-red-500 text-white text-xs
-                    ">
+                  <h2 className="flex items-center text-lg font-extrabold leading-7 text-dark">
+                    <span className="flex items-center justify-center w-5 h-5 text-xs text-center text-white bg-red-500 rounded-full ">
                       {nominations.length}
                     </span>
                     <span className="mx-4">
@@ -58,10 +53,7 @@ export default function Slider({ open, setOpen, nominations, removeNomination }:
                       onBtnClick={removeNomination}
                     />
                   ) : (
-                    <div className="
-                      flex items-center justify-center h-full
-                      font-light text-gray-400
-                    ">
+                    <div className="flex items-center justify-center h-full font-light text-gray-400 ">
                       Search and nominate some films!
                     </div>
                   )}
