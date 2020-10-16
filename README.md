@@ -8,7 +8,8 @@ The Nominator is a React App that allows users to:
 - Search OMDB (GET REQ limited to 10 results) for movies
 - Favorite searched movies into the nomination watchlist (via slider menu)
 - Firebase Cloud Firestore for generating sharable URL and persisting the watchlist (list of movies for the next movie night!)
-- Cookies to persist nominations watchlist
+- Firebase Coud Firestore for modifying existing (shared) watchlist
+- Cookies to persist nominations movie watchlist
 
 Built with **React** + **TypeScript** and **Tailwind CSS** with **Firebase Firestore** persistence and deployed to **Netlify**.
 
