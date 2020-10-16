@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory, useParams } from 'react-router';
 import { useToasts } from 'react-toast-notifications';
 
 import AppIcon from './AppIcon';
@@ -13,12 +14,13 @@ interface NavBarProps {
 }
 
 export default function NavBar({ sliderOpen, onSliderOpen }: NavBarProps) {
+  const history = useHistory();
   const {
     cookie, removeCookie,
-    nominations, setNominations,
-    setUserName
+    nominations, setNominations, setSharableURL, setUserName, setModifyingList
   } = GlobalState.useContainer();
   const { addToast } = useToasts();
+  const { id } = useParams();
 
   const handleShareClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (nominations.length > 0 && onSliderOpen !== undefined) {
@@ -33,11 +35,21 @@ export default function NavBar({ sliderOpen, onSliderOpen }: NavBarProps) {
   const handleGoHome = () => {
     setUserName('');
     setNominations(cookie.nominations !== undefined ? cookie.nominations : []);
+    setModifyingList(false);
+    history.push('/');
   };
 
-  const handleEditList = () => {
-    setUserName('');
+  const handleModifyList = () => {
     removeCookie('nominations');
+    setSharableURL(id);
+    setModifyingList(true);
+  };
+
+  const handleNewList = () => {
+    setUserName('');
+    setNominations([]);   // clear nominations from cookies for creating new list
+    setModifyingList(false);
+    history.push('/');
   };
 
   return (
@@ -63,10 +75,17 @@ export default function NavBar({ sliderOpen, onSliderOpen }: NavBarProps) {
                 />
               </>
             ) : (
-              <AppIcon
-                text="Edit List"
-                onClick={handleEditList}
-              />
+              <>
+                  <AppIcon
+                    className="mr-4"
+                    text="Modify"
+                    onClick={handleModifyList}
+                  />
+                  <AppIcon
+                    text="New"
+                    onClick={handleNewList}
+                  />
+              </>
             )}
           </div>
         </div>
