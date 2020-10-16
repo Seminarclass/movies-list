@@ -42,6 +42,11 @@ export default function SharePanel() {
       return;
     }
 
+    if (nominations.length === 0) {
+      addToast('Add some movies!', { appearance: 'error' });
+      return
+    }
+
     setNominationList(userName, nominations)
       .then(res => {
         setSharableURL(res.id);
