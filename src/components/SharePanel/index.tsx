@@ -38,13 +38,8 @@ export default function SharePanel() {
 
   const generateSharableLink = () => {
     if (userName === '') {
-      addToast('Username is reqired!', { appearance: 'error' });
+      addToast('Username is required!', { appearance: 'error' });
       return;
-    }
-
-    if (!touched) {
-      addToast('Add some movies!', { appearance: 'error' });
-      return
     }
 
     setNominationList(userName, nominations)
