@@ -72,20 +72,23 @@ export default function SharePanel() {
           <div className="max-w-xl mt-4 text-sm leading-5 text-gray-400">
             <p>
               {modifyingList ? `When you are done modifying, click the button below!` : sharableURL ? (
-                'URL generated! Share this list with your friends!'
+                'URL generated! Share this watchlist with your friends!'
               ) : 'Enter your name and generate a sharable link!'}
             </p>
           </div>
           <div className="mt-4">
-            {sharableURL ? (
-              <div className="w-full">
+            <div className="w-full">
+              {sharableURL ? (
                 <SharableTextField generatedURL={sharableURL} />
-              </div>
-            ) : null}
-            <span className={`
-              mt-4 inline-flex ${sharableURL ? 'md:ml-4' : ''
-              } sm:w-auto`
-            }>
+              ) : (
+                <InputField
+                  className="mr-4"
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                />
+              )}
+            </div>
+            <span className={`mt-4 inline-flex sm:w-auto`}>
               {sharableURL ? (
                 <>
                   <CopyButton onClick={copyToClipboard} />
@@ -93,16 +96,7 @@ export default function SharePanel() {
                     <SaveButton className="ml-2" onClick={updateSharedList} />
                   ) : null}
                 </>
-              ) : (
-                  <span>
-                    <InputField
-                      className="mr-4"
-                      value={userName}
-                      onChange={e => setUserName(e.target.value)}
-                    />
-                    <ShareButton onClick={generateSharableLink} />
-                  </span>
-                )}
+              ) : <ShareButton onClick={generateSharableLink} />}
             </span>
           </div>
         </div>

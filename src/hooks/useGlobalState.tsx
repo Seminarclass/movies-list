@@ -54,7 +54,7 @@ function GlobalState() {
     cookie, setCookie, removeCookie,
     agreesToCookie, setAgreeToCookie,
 
-    // NOMINATIONS LIST FOR SHARING
+    // NOMINATED WATCHLIST FOR SHARING
     nominations, setNominations,
     touched, setTouched,
     toggleNomination,

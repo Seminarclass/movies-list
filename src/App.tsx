@@ -11,15 +11,15 @@ import GlobalState from './hooks/useGlobalState';
 /*
  * The Nominator Features:
  *  * Search OMDB (limited to top 10 queries) for movies
- *  * Nominate your favorite movies under the nomination list (via slider menu)
+ *  * Nominate your favorite movies on the movie watchlist (via slider menu)
  *  * Badge (by Hamburger Menu) to show the total number of nominated movies
  *  * Cookies to store session
  *  * Notifications for searching, adding, removing movies
  *  * Sharable URL Links via Firebase (copy to clipboard)
+ *  * Modifiable Shared URL watchlist via Firebase
  *
  * TODO:
- * 1) modal when clicking on titles from search table
- * 2) Add react-transition-group for animations
+ * 1) Add react-transition-group for animations
  */
 
 export default function App() {
