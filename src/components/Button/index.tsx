@@ -1,12 +1,13 @@
 import React from 'react';
 
-interface ShareButtonProps {
+interface ButtonProps {
   className?: string;
   children?: React.ReactNode;
+  disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-export default function ShareButton({ className, children, onClick }: ShareButtonProps) {
+export default function Button({ className, children, disabled, onClick }: ButtonProps) {
   return (
     <button
       type="button"
@@ -19,6 +20,7 @@ export default function ShareButton({ className, children, onClick }: ShareButto
         focus:outline-none transition ease-in-out duration-150
         ${className}
       `}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useToasts } from 'react-toast-notifications';
 
+import AppPage from '../app';
 import FixedFooter from '../../components/FixedFooter';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -13,7 +14,10 @@ import GlobalState from '../../hooks/useGlobalState';
 import { getNominationList } from '../../services/firestore';
 
 export default function SharedPage() {
-  const { nominations, setNominations, setUserName } = GlobalState.useContainer();
+  const {
+    nominations, setNominations,
+    setUserName, modifyingList
+  } = GlobalState.useContainer();
   const { id } = useParams();
   const { addToast } = useToasts();
 
@@ -36,7 +40,7 @@ export default function SharedPage() {
     }
   }, [addToast, id, setNominations, setUserName]);
 
-  return (
+  return modifyingList ? <AppPage /> : (
     <div className="font-open">
       <NavBar />
       <Layout>
@@ -47,9 +51,9 @@ export default function SharedPage() {
           shared
           data={nominations}
         />
-      </Layout>
+      </Layout >
       <Footer />
       <FixedFooter />
-    </div>
+    </div >
   );
 }

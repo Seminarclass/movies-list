@@ -36,9 +36,23 @@ export const setNominationList = (userName: string, nominations: Array<Movies>) 
   const sessionsRef = db.collection('sessions');
 
   return sessionsRef.add({
-    created: firebase.firestore.FieldValue.serverTimestamp(),
     name: userName,
-    nominations: nominations
+    nominations: nominations,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+};
+
+/*
+ * UPDATE { nominations } to Firestore
+ */
+export const updateNominationList = (sessionId: string, userName: string, nominations: Array<Movies>) => {
+  const db = firebase.firestore();
+  const sessionsRef = db.collection('sessions');
+
+  return sessionsRef.doc(sessionId).update({
+    name: userName,
+    nominations: nominations,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
   });
 };
 

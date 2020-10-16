@@ -15,8 +15,13 @@ function GlobalState() {
   const [nominations, setNominations] = useState<Array<Movies>>(
     cookie.nominations !== undefined ? cookie.nominations : []
   );
+
+  // guard against API calls without changes
+  const [touched, setTouched] = useState<boolean>(false);
+
   const [userName, setUserName] = useState<string>('');
   const [sharableURL, setSharableURL] = useState<string>();
+  const [modifyingList, setModifyingList] = useState<boolean>(false);
 
   // if user agrees to cookies
   useEffect(() => {
@@ -26,10 +31,11 @@ function GlobalState() {
   }, [agreesToCookie, setCookie]);
 
   // URL FOR SHARING
+  /*
   useEffect(() => {
     setSharableURL(undefined);
   }, [nominations]);
-
+ */
 
   const toggleNomination = (newItem: Movies) => {
     const isNominated = nominations.some(movie => movie.imdbID === newItem.imdbID);
@@ -40,6 +46,7 @@ function GlobalState() {
       setNominations(prevState => [...prevState, newItem]);
       addToast(`Added "${newItem.Title}" to nomination!`, { appearance: 'success' });
     }
+    setTouched(true);
   };
 
   return {
@@ -49,13 +56,17 @@ function GlobalState() {
 
     // NOMINATIONS LIST FOR SHARING
     nominations, setNominations,
+    touched, setTouched,
     toggleNomination,
 
     // USERNAME FOR SHARING
     userName, setUserName,
 
     // URL FOR SHARING
-    sharableURL, setSharableURL
+    sharableURL, setSharableURL,
+
+    // BOOLEAN FOR MODIFYING LIST
+    modifyingList, setModifyingList
   };
 }
 
